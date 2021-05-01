@@ -1,0 +1,9 @@
+name: "E-Commerce App continuous Integration"
+
+on: [ push ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Test First github action."
