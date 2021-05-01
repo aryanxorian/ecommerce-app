@@ -16,6 +16,7 @@ trait CreatesApplication
         $app = require __DIR__.'/../bootstrap/app.php';
 
         $app->make(Kernel::class)->bootstrap();
+        exec('php artisan migrate:fresh --env=testing');
 
         return $app;
     }
