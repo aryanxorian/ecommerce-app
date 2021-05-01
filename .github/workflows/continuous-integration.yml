@@ -21,4 +21,4 @@ jobs:
           docker container logs ecommerce-app-db
 
       - name: Run unit tests.
-        run: docker container exec ecommerce-app-app /ecommerce-app/phpunit tests/
+        run: docker container exec ecommerce-app-app /ecommerce-app/run-unit-tests.sh
