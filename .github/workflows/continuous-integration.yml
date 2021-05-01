@@ -6,4 +6,5 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Test First github action."
+      - run: docker-compose --version
+        name: "Docker compose installation test"
