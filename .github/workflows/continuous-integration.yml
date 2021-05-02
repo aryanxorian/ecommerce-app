@@ -14,6 +14,9 @@ jobs:
         run: docker-compose up -d --build --force-recreate
       - name: Wait for sometime[30 sec] until containers are ready.
         run: sleep 30
-
       - name: Run unit tests.
         run: docker container exec ecommerce-app-app /ecommerce-app/run-unit-tests.sh
+      - name: Run specification tests.
+        run: docker container exec ecommerce-app-app /ecommerce-app/run-specification-tests.sh
+      - name: Run story tests.
+        run: docker container exec ecommerce-app-app /ecommerce-app/run-story-tests.sh
