@@ -1,0 +1,45 @@
+version: '3'
+
+networks:
+  ecommerce-app-network:
+
+services:
+  www:
+    container_name: ecommerce-app-www
+    build: ./.docker/local/nginx
+    ports:
+      - 81:81
+      - 82:80
+    volumes:
+      - .:/ecommerce-app
+    links:
+      - app
+    networks:
+      ecommerce-app-network:
+        aliases:
+          - test.ecommerceapp.com
+
+  app:
+    container_name: ecommerce-app-app
+    build: ./.docker/local/php
+    volumes:
+      - .:/ecommerce-app
+    env_file:
+      - ./.docker/local/.env
+    links:
+      - db
+    networks:
+      - ecommerce-app-network
+    hostname: app
+
+  db:
+    container_name: ecommerce-app-db
+    image: mysql:5.7
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_USER: ecommerceapp
+      MYSQL_PASSWORD: userpass
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: test_database
+    networks:
+      - ecommerce-app-network

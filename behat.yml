@@ -1,0 +1,8 @@
+default:
+    suites:
+        default:
+            paths:
+                - '%paths.base%/tests/stories'
+            contexts:
+                - EcommerceApp\Test\Stories\Bootstrap\FeatureContext:
+                      baseUrl: 'http://test.ecommerceapp.com:81'

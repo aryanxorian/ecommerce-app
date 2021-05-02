@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit;
+namespace EcommerceApp\Test\Units;
 
 use PHPUnit\Framework\TestCase;
 
