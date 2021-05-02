@@ -2,4 +2,4 @@
 /vendor/*
 /.phpunit.result.cache
 /.env
-/bootstrap/cache/*
+/bootstrap/cache/*.php
