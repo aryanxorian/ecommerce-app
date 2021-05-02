@@ -3,3 +3,5 @@
 /.phpunit.result.cache
 /.env
 /bootstrap/cache/*.php
+/storage/*/*.php
+/storage/*/*.log
