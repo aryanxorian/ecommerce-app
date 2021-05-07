@@ -2,6 +2,8 @@
 
 namespace EcommerceApp\Providers;
 
+use App\Checkout\PayPal;
+use App\Checkout\Stripe;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -13,7 +15,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->singleton(PaymentInterface::class,function(){
+            if(request()->has('PayPal'))
+                return new PayPal('Rupee');
+            
+                return new Stripe('Rupee');   
+        });
     }
 
     /**
