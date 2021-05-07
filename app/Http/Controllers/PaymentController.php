@@ -6,6 +6,7 @@ use EcommerceApp\Checkout\PaymentInterface;
 use EcommerceApp\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+
 class PaymentController extends Controller
 {
     public function checkout(PaymentInterface $payment)
