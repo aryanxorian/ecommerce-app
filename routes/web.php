@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\PaymentController;
+use EcommerceApp\Http\Controllers\PaymentController;
 use Illuminate\Support\Facades\Route;
 
 /*

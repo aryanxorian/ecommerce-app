@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace EcommerceApp\Http\Controllers;
 
-use App\Checkout\PaymentInterface;
+use EcommerceApp\Checkout\PaymentInterface;
 use EcommerceApp\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 

@@ -1,5 +1,5 @@
 <?php
-namespace App\Checkout;
+namespace EcommerceApp\Checkout;
 
 class PayPal implements PaymentInterface
 {

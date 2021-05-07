@@ -2,8 +2,9 @@
 
 namespace EcommerceApp\Providers;
 
-use App\Checkout\PayPal;
-use App\Checkout\Stripe;
+use EcommerceApp\Checkout\PaymentInterface;
+use EcommerceApp\Checkout\PayPal;
+use EcommerceApp\Checkout\Stripe;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
