@@ -1,7 +1,7 @@
 <?php
-namespace EcommerceApp\Checkout;
+namespace EcommerceApp\Services\Payment;
 
-class PayPal implements PaymentInterface
+class StripeService implements PaymentService
 {
     private $currency;
 
@@ -15,7 +15,7 @@ class PayPal implements PaymentInterface
         return [
             'amount'=> $amount,
             'currency'=>$this->currency,
-            'method'=>'PayPal',
+            'method'=>'Stripe',
         ];
     }
 }

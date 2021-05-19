@@ -2,6 +2,7 @@
 
 use EcommerceApp\Http\Controllers\PaymentController;
 use Illuminate\Support\Facades\Route;
+use EcommerceApp\Mail\AccountCreated;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,3 +20,7 @@ Route::get('/', function () {
 });
 
 Route::get('pay',[PaymentController::class,'checkout']);
+
+Route::get('signup',function(){
+    return new AccountCreated();
+});

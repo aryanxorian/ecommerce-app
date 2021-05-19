@@ -10,7 +10,10 @@
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.3",
         "laravel/framework": "^8.12",
-        "laravel/tinker": "^2.5"
+        "laravel/tinker": "^2.5",
+        "laravelcollective/html": "^6.2",
+        "spatie/laravel-permission": "^4.0",
+        "tymon/jwt-auth": "^1.0"
     },
     "require-dev": {
         "behat/behat": "^3.8",
