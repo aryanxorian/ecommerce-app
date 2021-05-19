@@ -6,6 +6,10 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Event;
+use EcommerceApp\Events\LoginHistory;
+use EcommerceApp\Listeners\UserLoginHistory;
+use EcommerceApp\Events\RegisterUser;
+use EcommerceApp\Listeners\RegisterUserInDB;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -18,6 +22,9 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+        // LoginHistory::class => [
+        //     UserLoginHistory::class,
+        // ],
     ];
 
     /**
@@ -27,6 +34,18 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Event::listen(
+            RegisterUser::class,
+            [RegisterUserInDB::class,'handle']);
+        Event::listen(
+            LoginHistory::class,
+            [UserLoginHistory::class, 'handle']
+        );
+
     }
+
+    // public function shouldDiscoverEvents()
+    // {
+    //     return true;
+    // }
 }

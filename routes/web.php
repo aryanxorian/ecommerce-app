@@ -1,6 +1,8 @@
 <?php
 
+use EcommerceApp\Http\Controllers\PaymentController;
 use Illuminate\Support\Facades\Route;
+use EcommerceApp\Mail\AccountCreated;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,5 +16,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return 'It Works!';
+    return 'Hello World!!';
+});
+
+Route::get('pay',[PaymentController::class,'checkout']);
+
+Route::get('signup',function(){
+    return new AccountCreated();
 });
