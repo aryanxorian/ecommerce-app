@@ -10,6 +10,8 @@ use EcommerceApp\Events\LoginHistory;
 use EcommerceApp\Listeners\UserLoginHistory;
 use EcommerceApp\Events\RegisterUser;
 use EcommerceApp\Listeners\RegisterUserInDB;
+use EcommerceApp\Events\AddProduct;
+use EcommerceApp\Listeners\AddProductInDB;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -40,6 +42,10 @@ class EventServiceProvider extends ServiceProvider
         Event::listen(
             LoginHistory::class,
             [UserLoginHistory::class, 'handle']
+        );
+        Event::listen(
+            AddProduct::class,
+            [AddProductInDB::class, 'handle']
         );
 
     }

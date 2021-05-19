@@ -1,5 +1,6 @@
 <?php
 
+use EcommerceApp\Http\Controllers\ProductController;
 use EcommerceApp\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -26,4 +27,9 @@ Route::post('register',[UserController::class,'register']);
 Route::group(['middleware' => ['jwt.verify']], function(){
     Route::get('logout',[UserController::class,'logout']);
     Route::get('profile',[UserController::class,'profile']);
+    Route::post('addproduct',[ProductController::class,'addProduct']);
+    Route::delete('deleteproduct/{id}', [ProductController::class,'deleteProduct']);
 });
+
+Route::get('listproducts/{id?}', [ProductController::class,'listProduct']);
+Route::get('search/{key}', [ProductController::class, 'searchProduct']);
