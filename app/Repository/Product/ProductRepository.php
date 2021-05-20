@@ -16,6 +16,7 @@ class ProductRepository implements ProductRepositoryInterface
     public function add($productData)
     {
         // $product = new Product();
+        $this->product->user_id = $productData['user_id'];
         $this->product->name = $productData['name'];
         $this->product->file_path = $productData['file'];
         $this->product->description = $productData['description'];

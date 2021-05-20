@@ -16,14 +16,12 @@ class CartRepository implements CartRepositoryInterface
         $cart->user_id = $cartData['user_id'];
         $cart->product_id = $cartData['product_id'];
         $cart->quantity = $cartData['quantity'];
-        $cart->total = $productDetails['price'] * $cartData['quantity'];
         $cart->save();
 
         $productDetails = Product::find($cartData['product_id']);
         $cartDetails['product_name'] = $productDetails['name'];
         $cartDetails['product_price'] = $productDetails['price'];
         $cartDetails['quantity'] = $cart['quantity'];
-        $cartDetails['total'] = $cart['total'];
         return $cartDetails;
     }
 
@@ -39,8 +37,6 @@ class CartRepository implements CartRepositoryInterface
                 $cartDetails['product_name'] = $product['name'];
                 $cartDetails['product_price'] = $product['price'];
                 $cartDetails['quantity'] = $cart['quantity'];
-                $cartDetails['cart_total'] = $cart['total'];
-                //dd($cartDetails);
                 return $cartDetails;
             }
         }

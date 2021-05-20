@@ -7,14 +7,17 @@ use EcommerceApp\Services\Response\ResponseService;
 use EcommerceApp\Services\Product\ProductInterface;
 use EcommerceApp\Services\Product\ProductService;
 use Illuminate\Http\Request;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class ProductController extends Controller
 {
     public function addProduct(ProductRequest $request, ProductInterface $productService)
     {
+        $payload = JWTAuth::payload();
         $product = $request->validated();
         $file = $request->file('file')->store('products');
         $product['file'] = $file;
+        $product['user_id'] = $payload['sub'];
         $productData = $productService->add($product);
 
         if($productData)
@@ -28,10 +31,9 @@ class ProductController extends Controller
     public function listProduct($id=null, ProductInterface $productService)
     {
         $listProduct = $productService->list($id);
-        
         if($listProduct)
         {
-            ResponseService::listProductSuccessfullResponse($listProduct);
+            return ResponseService::listProductSuccessfullResponse($listProduct);
         }
 
         return ResponseService::internalServerErrorResponse(null);

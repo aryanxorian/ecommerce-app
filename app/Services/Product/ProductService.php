@@ -2,7 +2,9 @@
 
 namespace EcommerceApp\Services\Product;
 
+use EcommerceApp\Models\Cart;
 use EcommerceApp\Repository\Product\ProductRepositoryInterface;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class ProductService implements ProductInterface
 {
@@ -22,8 +24,15 @@ class ProductService implements ProductInterface
 
     public function delete($id)
     {
-        $productRepo = resolve(ProductRepositoryInterface::class);
-        return $productRepo->delete($id);
+        $payload = JWTAuth::payload();
+        if($id == $payload['sub'])
+        {
+            $productRepo = resolve(ProductRepositoryInterface::class);
+            return $productRepo->delete($id);
+        }
+
+        return false;
+        
     }
 
     public function search($key)
