@@ -4,6 +4,7 @@ namespace EcommerceApp\Http\Controllers;
 
 use EcommerceApp\Events\LoginHistory;
 use EcommerceApp\Events\RegisterUser;
+use EcommerceApp\Events\WelcomeMail;
 use EcommerceApp\Http\Requests\LoginRequest;
 use EcommerceApp\Http\Requests\RegistrationRequest;
 use EcommerceApp\Models\User;
@@ -22,42 +23,50 @@ class UserController extends Controller
     public function register(RegistrationRequest $request)
     {
         $data = $request->validated();
-        RegisterUser::dispatch($data);
-        return ResponseService::successResponse($data,'User Created Successfully');
+        $registerUser = RegisterUser::dispatch($data);
+        return ResponseService::registerSuccessfullResponse($registerUser);
     }
 
     public function login(LoginRequest $request)
     { 
         $credentials = $request->validated();
+
         try
         {
             $token = JWTAuth::attempt($credentials);
             if(!$token)
             {
-                return ResponseService::errorResponse(null,'Login Credentials are invalid');
+                return ResponseService::invalidCredentialsResponse(null);
             }
         }catch(JWTException $e)
         {
-            return ResponseService::internalServerError(null,'Could not create token');
+            return ResponseService::internalServerErrorResponse(null);
         }
+        
         $user = $request->email;
         LoginHistory::dispatch($user);
-        return ResponseService::successResponse($token,'Logged in Successfully');
+        return ResponseService::loginSuccessfullResponse($token);
     }
 
     public function logout(Request $request)
     {
         try {
             JWTAuth::invalidate($request->header('Authorization'));
-            return ResponseService::successResponse(null,'User has been logged out');
+            return ResponseService::logoutSuccessfullResponse(null);
         } catch (JWTException $exception) {
-            return ResponseService::internalServerError(null,'User cannot be logged out');
+            return ResponseService::internalServerErrorResponse(null);
         }
     }
 
     public function profile(Request $request)
     {
         $user = JWTAuth::authenticate($request->header('Authorization'));
-        return ResponseService::successResponse($user,'User Profile');
+        if($user)
+        {
+            return ResponseService::profileSuccessfullResponse($user);
+        }
+
+        return ResponseService::internalServerErrorResponse(null);
+        
     }
 }

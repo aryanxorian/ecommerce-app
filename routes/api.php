@@ -1,5 +1,6 @@
 <?php
 
+use EcommerceApp\Http\Controllers\CartController;
 use EcommerceApp\Http\Controllers\ProductController;
 use EcommerceApp\Http\Controllers\UserController;
 use Illuminate\Http\Request;
@@ -29,6 +30,8 @@ Route::group(['middleware' => ['jwt.verify']], function(){
     Route::get('profile',[UserController::class,'profile']);
     Route::post('addproduct',[ProductController::class,'addProduct']);
     Route::delete('deleteproduct/{id}', [ProductController::class,'deleteProduct']);
+    Route::post('addtocart',[CartController::class,'addItem']);
+    Route::get('viewcart',[CartController::class, 'viewCart']);
 });
 
 Route::get('listproducts/{id?}', [ProductController::class,'listProduct']);

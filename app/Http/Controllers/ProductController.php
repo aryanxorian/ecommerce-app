@@ -2,49 +2,59 @@
 
 namespace EcommerceApp\Http\Controllers;
 
-use EcommerceApp\Events\AddProduct;
 use EcommerceApp\Http\Requests\ProductRequest;
-use EcommerceApp\Models\Product;
 use EcommerceApp\Services\Response\ResponseService;
+use EcommerceApp\Services\Product\ProductInterface;
+use EcommerceApp\Services\Product\ProductService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 
 class ProductController extends Controller
 {
-    public function addProduct(ProductRequest $request)
+    public function addProduct(ProductRequest $request, ProductInterface $productService)
     {
         $product = $request->validated();
         $file = $request->file('file')->store('products');
-        $saveHistory = AddProduct::dispatch($product,$file);
-        if($saveHistory)
+        $product['file'] = $file;
+        $productData = $productService->add($product);
+
+        if($productData)
         {
-            return ResponseService::successResponse($product,'Product added Successfully');
+            return ResponseService::productAddedSuccessfullResponse($request->all());
         }
-        else
-        {
-            return ResponseService::internalServerError(null,'Product could not be added');
-        }
+        
+        return ResponseService::internalServerErrorResponse(null);
     }
 
-    public function listProduct($id=null)
+    public function listProduct($id=null, ProductInterface $productService)
     {
-        return $id?Product::find($id):Product::all();
+        $listProduct = $productService->list($id);
+        
+        if($listProduct)
+        {
+            ResponseService::listProductSuccessfullResponse($listProduct);
+        }
+
+        return ResponseService::internalServerErrorResponse(null);
     }
 
-    public function deleteProduct($id)
+    public function deleteProduct($id, ProductInterface $productService)
     {
-        if(Product::where('id', $id)->delete())
+        if($productService->delete($id))
         {
-            return ResponseService::successResponse(null,'Product Deleted Successfully');
+            return ResponseService::productDeletedSuccessfullResponse(null);
         }
-        else
-        {
-            return ResponseService::errorResponse(null,'Product cannot be deleted');
-        }
+        
+        return ResponseService::internalServerErrorResponse(null);
     }
 
-    public function searchProduct($key)
+    public function searchProduct($key, ProductInterface $productService)
     {
-        return Product::where('name','Like',"%$key%")->get();
+        $searchDetails = $productService->search($key);
+        if($searchDetails->count() > 0)
+        {
+            return $searchDetails;
+        }
+
+        return ResponseService::searchErrorResponse(null);
     }
 }

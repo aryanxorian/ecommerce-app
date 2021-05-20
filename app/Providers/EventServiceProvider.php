@@ -12,6 +12,8 @@ use EcommerceApp\Events\RegisterUser;
 use EcommerceApp\Listeners\RegisterUserInDB;
 use EcommerceApp\Events\AddProduct;
 use EcommerceApp\Listeners\AddProductInDB;
+use EcommerceApp\Events\WelcomeMail;
+use EcommerceApp\Listeners\SendWelcomeMail;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -44,8 +46,8 @@ class EventServiceProvider extends ServiceProvider
             [UserLoginHistory::class, 'handle']
         );
         Event::listen(
-            AddProduct::class,
-            [AddProductInDB::class, 'handle']
+            WelcomeMail::class,
+            [SendWelcomeMail::class,]
         );
 
     }

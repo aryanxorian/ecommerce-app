@@ -11,21 +11,18 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Log;
 
-class AddProduct
+class WelcomeMail
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
-
-    private $product, $file;
+    private $data;
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($product, $file)
+    public function __construct($data)
     {
-        //Log::error("Hello");
-        $this->product = $product;
-        $this->file = $file;
+        $this->data = $data;
     }
 
     /**
@@ -38,13 +35,8 @@ class AddProduct
         return new PrivateChannel('channel-name');
     }
 
-    public function getProduct()
+    public function getData()
     {
-        return $this->product;
-    }
-
-    public function getFile()
-    {
-        return $this->file;
+        return $this->data;
     }
 }

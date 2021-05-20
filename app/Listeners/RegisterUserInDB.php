@@ -3,11 +3,7 @@
 namespace EcommerceApp\Listeners;
 
 use EcommerceApp\Events\RegisterUser;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Log;
+use EcommerceApp\Services\User\RegisterInterface;
 
 class RegisterUserInDB
 {
@@ -29,11 +25,10 @@ class RegisterUserInDB
      */
     public function handle(RegisterUser $event)
     {
+        $registerService = resolve(RegisterInterface::class); 
         $user = $event->getUser();
-        // Log::error($user);
-        $saveHistory = DB::table('users')->insert(
-            ['name' => $user['name'], 'email' => $user['email'], 'password' => Hash::make($user['password'])]
-        );
+
+        $saveHistory = $registerService->register($user);
         return $saveHistory;
     }
 }

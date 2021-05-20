@@ -167,7 +167,7 @@ return [
          * Package Service Providers...
          */
         'Tymon\JWTAuth\Providers\LaravelServiceProvider',
-        EcommerceApp\Repository\RepositoryServiceProvider::class,
+
         /*
          * Application Service Providers...
          */
@@ -177,6 +177,8 @@ return [
         // EcommerceApp\Providers\BroadcastServiceProvider::class,
         EcommerceApp\Providers\EventServiceProvider::class,
         EcommerceApp\Providers\RouteServiceProvider::class,
+        EcommerceApp\Repository\RepositoryServiceProvider::class,
+        EcommerceApp\Services\ServicesServiceProvider::class,
 
     ],
 
