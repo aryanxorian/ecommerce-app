@@ -1,5 +1,6 @@
 <?php
 
+use EcommerceApp\Http\Controllers\AddressController;
 use EcommerceApp\Http\Controllers\CartController;
 use EcommerceApp\Http\Controllers\ProductController;
 use EcommerceApp\Http\Controllers\UserController;
@@ -32,6 +33,9 @@ Route::group(['middleware' => ['jwt.verify']], function(){
     Route::delete('deleteproduct/{id}', [ProductController::class,'deleteProduct']);
     Route::post('addtocart',[CartController::class,'addItem']);
     Route::get('viewcart',[CartController::class, 'viewCart']);
+    Route::post('addaddress', [AddressController::class, 'addAddress']);
+    Route::get('viewaddress/{id?}', [AddressController::class, 'viewAddress']);
+    Route::delete('deleteaddress/{id?}', [AddressController::class, 'deleteAddress']);
 });
 
 Route::get('listproducts/{id?}', [ProductController::class,'listProduct']);

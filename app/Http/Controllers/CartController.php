@@ -10,11 +10,13 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 
 class CartController extends Controller
 {
+    /**
+     * 
+     * 
+     */
     public function addItem(CartRequest $request, CartInterface $item)
     {
-        $payload = JWTAuth::payload();
         $cart = $request->validated();
-        $cart['user_id'] = $payload['sub'];
         $cartData = $item->add($cart);
 
         if($cartData)
@@ -27,8 +29,7 @@ class CartController extends Controller
 
     public function viewCart(CartInterface $item)
     {
-        $payload = JWTAuth::payload();
-        $viewCart = $item->view($payload['sub']);
+        $viewCart = $item->view();
         
         if($viewCart)
         {

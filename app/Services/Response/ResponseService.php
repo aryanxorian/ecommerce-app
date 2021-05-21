@@ -21,7 +21,10 @@ class ResponseService
         'itemAddedSuccessfullResponse' => ['code' => 200, 'message' => 'Item Added to Cart Successfully', 'status' => true],
         'cartDetailsSuccessfullResponse' => ['code' => 200, 'message' => 'Cart Details', 'status' => true],
         'searchErrorResponse' => ['code' => 200, 'message' => 'No products found', 'status' => false],
-        'listProductSuccessfullResponse' => ['code' => 200, 'message' => 'List of Products', 'status' => true]
+        'listProductSuccessfullResponse' => ['code' => 200, 'message' => 'List of Products', 'status' => true],
+        'addessAddedSuccessfullResponse' => ['code' => 200, 'message' => 'Address has been successfully added', 'status' => true],
+        'viewAddressSuccessfullResponse' => ['code' => 200, 'message' => 'User Addresses', 'status' => true],
+        'addressDeletedResponse' => ['code' => 200, 'message' => 'Address Deleted Successfully', 'status' => true]
     ];
 
     private static function response($response, $data=null)

@@ -15,10 +15,16 @@ class RegisterUser
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
+    /**
+     * 
+     * @var private instance of user login credentials
+     */
     private $user;
+
     /**
      * Create a new event instance.
      *
+     * @param $user User login credentials
      * @return void
      */
     public function __construct($user)
@@ -36,6 +42,10 @@ class RegisterUser
         return new PrivateChannel('channel-name');
     }
 
+    /**
+     * 
+     * @return The private instance of user login credentials
+     */
     public function getUser()
     {
         return $this->user;

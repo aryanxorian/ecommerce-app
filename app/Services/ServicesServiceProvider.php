@@ -2,6 +2,8 @@
 
 namespace EcommerceApp\Services;
 
+use EcommerceApp\Services\Address\AddressInterface;
+use EcommerceApp\Services\Address\AddressService;
 use EcommerceApp\Services\Cart\CartInterface;
 use EcommerceApp\Services\Cart\CartService;
 use EcommerceApp\Services\Product\ProductInterface;
@@ -22,6 +24,7 @@ class ServicesServiceProvider extends ServiceProvider
         $this->app->singleton(ProductInterface::class, ProductService::class);
         $this->app->singleton(CartInterface::class, CartService::class);
         $this->app->singleton(RegisterInterface::class, RegisterService::class);
+        $this->app->singleton(AddressInterface::class,AddressService::class);
     }
 
     /**

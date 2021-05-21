@@ -2,6 +2,8 @@
 
 namespace EcommerceApp\Repository;
 
+use EcommerceApp\Repository\Address\AddressRepository;
+use EcommerceApp\Repository\Address\AddressRepositoryInterface;
 use EcommerceApp\Repository\Cart\CartRepository;
 use EcommerceApp\Repository\Cart\CartRepositoryInterface;
 use EcommerceApp\Repository\Product\ProductRepository;
@@ -22,6 +24,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->singleton(ProductRepositoryInterface::class, ProductRepository::class);
         $this->app->singleton(CartRepositoryInterface::class, CartRepository::class);
         $this->app->singleton(UserRepositoryInterface::class, UserRepository::class);
+        $this->app->singleton(AddressRepositoryInterface::class, AddressRepository::class);
     }
 
     /**
