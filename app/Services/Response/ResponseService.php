@@ -24,7 +24,8 @@ class ResponseService
         'listProductSuccessfullResponse' => ['code' => 200, 'message' => 'List of Products', 'status' => true],
         'addessAddedSuccessfullResponse' => ['code' => 200, 'message' => 'Address has been successfully added', 'status' => true],
         'viewAddressSuccessfullResponse' => ['code' => 200, 'message' => 'User Addresses', 'status' => true],
-        'addressDeletedResponse' => ['code' => 200, 'message' => 'Address Deleted Successfully', 'status' => true]
+        'addressDeletedResponse' => ['code' => 200, 'message' => 'Address Deleted Successfully', 'status' => true],
+        'checkoutCompleteResponse' => ['code' => 200, 'message' => 'Checkout Successfull', 'status' => true]
     ];
 
     private static function response($response, $data=null)

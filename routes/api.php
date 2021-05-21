@@ -2,6 +2,7 @@
 
 use EcommerceApp\Http\Controllers\AddressController;
 use EcommerceApp\Http\Controllers\CartController;
+use EcommerceApp\Http\Controllers\CheckoutController;
 use EcommerceApp\Http\Controllers\ProductController;
 use EcommerceApp\Http\Controllers\UserController;
 use Illuminate\Http\Request;
@@ -36,6 +37,7 @@ Route::group(['middleware' => ['jwt.verify']], function(){
     Route::post('addaddress', [AddressController::class, 'addAddress']);
     Route::get('viewaddress/{id?}', [AddressController::class, 'viewAddress']);
     Route::delete('deleteaddress/{id?}', [AddressController::class, 'deleteAddress']);
+    Route::post('checkout/{id}', [CheckoutController::class, 'checkout']);
 });
 
 Route::get('listproducts/{id?}', [ProductController::class,'listProduct']);
