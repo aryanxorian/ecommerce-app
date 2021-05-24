@@ -30,8 +30,11 @@ Route::post('register',[UserController::class,'register']);
 Route::group(['middleware' => ['jwt.verify']], function(){
     Route::get('logout',[UserController::class,'logout']);
     Route::get('profile',[UserController::class,'profile']);
-    Route::post('addproduct',[ProductController::class,'addProduct']);
-    Route::delete('deleteproduct/{id}', [ProductController::class,'deleteProduct']);
+
+    Route::group(['middleware' => ['checkUserType']], function(){
+        Route::post('addproduct',[ProductController::class,'addProduct'])->name('addproduct');
+        Route::delete('deleteproduct/{id}', [ProductController::class,'deleteProduct'])->name('deleteproduct');
+    });
     Route::post('addtocart',[CartController::class,'addItem']);
     Route::get('viewcart',[CartController::class, 'viewCart']);
     Route::post('addaddress', [AddressController::class, 'addAddress']);

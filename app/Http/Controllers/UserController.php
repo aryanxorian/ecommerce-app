@@ -22,7 +22,12 @@ class UserController extends Controller
 {
     public function register(RegistrationRequest $request)
     {
+        $type = 0;
+        if($request->has('type'))
+            $type = $request->type;
         $data = $request->validated();
+        $data['type'] = $type;
+        //dd($data);
         $registerUser = RegisterUser::dispatch($data);
         return ResponseService::registerSuccessfullResponse($registerUser);
     }
@@ -45,6 +50,8 @@ class UserController extends Controller
         
         $user = $request->email;
         LoginHistory::dispatch($user);
+        // $userRoles = JWTAuth::user()->roles()->pluck('name');
+        // dd($userRoles[0]);
         return ResponseService::loginSuccessfullResponse($token);
     }
 
